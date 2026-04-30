@@ -1,0 +1,30 @@
+---
+- name: Configure platform lab server
+  hosts: platform_lab
+  become: true
+
+  tasks:
+    - name: Update apt package cache
+      apt:
+        update_cache: yes
+
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Ensure nginx is running
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Install htop
+      apt:
+        name: htop
+        state: present
+
+    - name: Create a marker file to confirm Ansible ran
+      copy:
+        content: "Provisioned by Ansible on {{ ansible_date_time.iso8601 }}\n"
+        dest: /etc/platform-lab-provisioned

@@ -29,4 +29,3 @@
         content: "Provisioned by Ansible on {{ ansible_date_time.iso8601 }}\n"
         dest: /etc/platform-lab-provisioned
         mode: '0644'
-
